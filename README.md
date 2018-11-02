@@ -1,6 +1,6 @@
-# pokerapp
+# okeyapp
 
-> pokeroyunu
+> okeyoyunu
 
 ## Build Setup
 
