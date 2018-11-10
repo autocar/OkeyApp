@@ -1,5 +1,4 @@
 import { TableModel, SaloonModel } from '../models/models';
-import { db } from '../main';
 
 export default {
    state: {
@@ -23,14 +22,14 @@ export default {
    },
    actions: {
       getTables({ commit, dispatch }, payload) {
-         db.collection("tables").get().then(res=>{
+         /* db.collection("tables").get().then(res=>{
             console.log(res);
          }).catch(err=>{
             console.log(err);
-         });
+         }); */
       },
       getSaloons({commit}) {
-         db.collection("saloons").get().then(res=>{
+         /* db.collection("saloons").get().then(res=>{
             commit("resetSaloons");
             res.forEach(r=>{
                var d = new SaloonModel();
@@ -40,10 +39,10 @@ export default {
             });
          }).catch(err=>{
             console.log(err);
-         })
+         }) */
       },
       addSaloon({commit}, payload){
-         const saloon = new SaloonModel();
+         /* const saloon = new SaloonModel();
          saloon.saloonName = payload.name;
          db.collection("saloons").add({ name: payload.name }).then(res=>{
             saloon.saloonId = res.id
@@ -51,7 +50,7 @@ export default {
             commit("pushSaloon", saloon);
          }).catch(err=>{
             console.log(err);
-         });
+         }); */
       },
       selectSaloon({commit}, payload){
          commit("secSalon", payload);

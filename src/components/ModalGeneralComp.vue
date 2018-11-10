@@ -6,7 +6,8 @@
 
         <div class="modal-close-button">
           <button @click="$emit('modal-close')">
-            <img src="../assets/images/menu-icon-logout.png" />
+            <!-- <img src="../assets/images/menu-icon-logout.png" /> -->
+            <i class="fa fa-window-close"></i>
           </button>
         </div>
 
@@ -32,25 +33,32 @@
 </template>
 
 <script>
-import StorePage from '../pages/StorePage.vue';
-import GoldAccountPage from '../pages/GoldAccountPage.vue';
-import RoomListPage from '../pages/RoomListPage.vue';
-import RentSaloonPage from '../pages/RentSaloonPage.vue';
-import ContactPage from '../pages/ContactPage.vue';
-import HelpPage from '../pages/HelpPage.vue';
-import SettingsPage from '../pages/SettingsPage.vue';
-import ProfilePage from '../pages/ProfilePage.vue';
+import StorePage from "../pages/StorePage.vue";
+import GoldAccountPage from "../pages/GoldAccountPage.vue";
+import RoomListPage from "../pages/RoomListPage.vue";
+import RentSaloonPage from "../pages/RentSaloonPage.vue";
+import ContactPage from "../pages/ContactPage.vue";
+import HelpPage from "../pages/HelpPage.vue";
+import SettingsPage from "../pages/SettingsPage.vue";
+import ProfilePage from "../pages/ProfilePage.vue";
 
 export default {
   name: "ModalGeneralComp",
   props: { pageName: false },
   data() {
     return {
-      mesaj: "HHGsun",
+      mesaj: "HHGsun"
     };
   },
   components: {
-    StorePage, GoldAccountPage, RoomListPage, RentSaloonPage, ContactPage, HelpPage, SettingsPage, ProfilePage
+    StorePage,
+    GoldAccountPage,
+    RoomListPage,
+    RentSaloonPage,
+    ContactPage,
+    HelpPage,
+    SettingsPage,
+    ProfilePage
   }
 };
 </script>
@@ -112,11 +120,11 @@ div.modal-close-button {
   z-index: 5;
 }
 div.modal-close-button button {
-  width: 40px;
-  height: 40px;
-  background: #d6d6d6;
-  border: 2px solid #ffffff;
+  background: none;
+  border: none;
   border-radius: 50%;
+  font-size: 40px;
+  color: #ffffff;
 }
 
 /*

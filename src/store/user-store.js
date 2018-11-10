@@ -1,6 +1,4 @@
 import { UserModel } from '../models/models';
-import { db, auth } from '../main';
-import firebase from "firebase";
 
 export default {
    state: {
@@ -16,7 +14,7 @@ export default {
          // commit('setLoading', true)
       },
       signUpEmailPass({ commit, dispatch }, payload) {
-         auth.createUserWithEmailAndPassword(payload.email, payload.password).then(user => {
+         /* auth.createUserWithEmailAndPassword(payload.email, payload.password).then(user => {
             const newUser = new UserModel();
             newUser.email = user.user.email;
             newUser.userId = user.user.uid;
@@ -29,10 +27,10 @@ export default {
          }).catch(err => {
             console.log(err);
             alert(err.message);
-         })
+         }) */
       },
       signInEmailPass({ commit }, payload) {
-         auth.signInWithEmailAndPassword(payload.email, payload.password).then(user => {
+         /* auth.signInWithEmailAndPassword(payload.email, payload.password).then(user => {
             const newUser = new UserModel();
             newUser.email = user.user.email;
             newUser.userId = user.user.uid;
@@ -43,10 +41,10 @@ export default {
          }).catch(err => {
             console.log(err);
             alert(err.message);
-         })
+         }) */
       },
       signInGoogle({ commit, dispatch }) {
-         auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(user => {
+         /* auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(user => {
             const newUser = new UserModel();
             newUser.email = user.user.email;
             newUser.userId = user.user.uid;
@@ -58,10 +56,10 @@ export default {
          }).catch(err => {
             console.log(err);
             alert(err.message)
-         })
+         }) */
       },
       signInFacebook({ commit, dispatch }) {
-         auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(user => {
+         /* auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(user => {
             const newUser = new UserModel();
             newUser.email = user.user.email;
             newUser.userId = user.user.uid;
@@ -73,10 +71,10 @@ export default {
          }).catch(err => {
             console.log(err);
             alert(err.message)
-         })
+         }) */
       },
       autoSignIn({ commit }, payload) {
-         if(payload) {
+         /* if(payload) {
             const newUser = new UserModel();
             newUser.email = payload.email;
             newUser.userId = payload.uid;
@@ -84,19 +82,19 @@ export default {
             newUser.photoUrl = payload.photoURL;
             console.log("autosign user", newUser);
             commit('setUser', newUser);
-         }
+         } */
       },
       logout({ commit }) {
-         auth.signOut();
-         commit('setUser', null);
+         /* auth.signOut();
+         commit('setUser', null); */
       },
       userDataSet({},userData) {
-         db.collection("users").doc(userData.userId).set({
+         /* db.collection("users").doc(userData.userId).set({
             userId: userData.userId,
             email: userData.email,
             name: userData.name,
             photoUrl: userData.photoUrl
-         }).then(()=>{ console.log("userDataSet Success"); }).catch(err=>{ console.log("userDataSet Error",err); });
+         }).then(()=>{ console.log("userDataSet Success"); }).catch(err=>{ console.log("userDataSet Error",err); }); */
       }
    },
    getters: {

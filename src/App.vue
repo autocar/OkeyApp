@@ -7,8 +7,6 @@
 </template>
 
 <script>
-import firebase from "firebase";
-
 export default {
   name: "App",
   data(){
@@ -17,17 +15,15 @@ export default {
     }
   },
   created() {
-    console.log("App.vue starting");
-    firebase.auth().onAuthStateChanged(user => {
-      console.log("app.vue auth", user);
-      if (user) this.$store.dispatch("autoSignIn", user);
-      this.startLoading = false;
-    });
+    this.startLoading = false;
   },
 };
 </script>
 
 <style>
+/*awesome*/
+@import 'assets/css/font-awesome.min.css';
+
 body {
   background-image: url("./assets/images/login-bg-lamb.png");
   background-size: cover;
@@ -42,7 +38,7 @@ body {
 }
 
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'FontAwesome',"Helvetica Neue",Helvetica,Arial,sans-serif /* "Avenir", Helvetica, Arial, sans-serif */;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

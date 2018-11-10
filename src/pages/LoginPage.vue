@@ -22,10 +22,16 @@
           </div>
         </div>
         <div class="input-fields other-fields">
-          <input @click="facebookGiris()" class="facebook-giris" type="button" value="Facebook'ta Oyna" />
-          <input @click="googleGiris()" class="google-giris" type="button" value="Google ile Giriş" />
+          <!-- <input @click="facebookGiris()" class="facebook-giris" type="button" value="Facebook'ta Oyna" />
+          <input @click="googleGiris()" class="google-giris" type="button" value="Google ile Giriş" /> -->
           <input @click="kayitOl()" class="kayit-ol" type="button" value="Kayıt Ol" />
           <input @click="misafir()" class="misafir-giris" type="button" value="Misafir olarak oyna" />
+
+          <hr>
+
+          <div id="google-signin-button"></div>
+          <input @click="facebookLogin()" class="facebook-giris" type="button" value="Facebook ile Giriş" />
+
         </div>
       </div>
     </div>
@@ -42,18 +48,36 @@ export default {
       password: ""
     };
   },
+  mounted() {
+    gapi.signin2.render("google-signin-button", {
+      onsuccess: this.googleLogin
+    });
+  },
   computed: {
     user() {
       return this.$store.getters.user;
     }
   },
   watch: {
-    user(value){
-      if(value !== null && value !== undefined)
-        this.$router.push('/saloon-select')
+    user(value) {
+      if (value !== null && value !== undefined)
+        this.$router.push("/saloon-select");
     }
   },
   methods: {
+    googleLogin(googleUser) {
+      console.log("googleLogin:", googleUser);
+      var profile = googleUser.getBasicProfile();
+      console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log("Name: " + profile.getName());
+      console.log("Image URL: " + profile.getImageUrl());
+      console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+    },
+    facebookLogin() {
+      FB.login(function(res) {
+        console.log("facebookLogin", res);
+      });
+    },
     kayitOl() {
       this.$router.push({ path: "/signup" });
     },
@@ -70,14 +94,53 @@ export default {
       this.$store.dispatch("signInGoogle");
     },
     misafir() {
-      alert("Misafir Girişi");
+      this.denemeMisafirAuth();
+    },
+    denemeMisafirAuth() {
+      fetch("http://game-server-dev.now.sh/api/auth/login", {
+        method: "POST",
+        /* bu kısım olunca CORS hatası veriyor
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }, */
+        body: JSON.stringify({
+          type: "guest"
+        })
+      })
+        .then(res => res.json())
+        .then(function(data) {
+          console.log(data);
+          if (data.success === false) {
+            alert("hata " + JSON.stringify(data));
+            return;
+          }
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+    authServer(type, id) {
+      fetch("http://game-server-dev.now.sh/api/auth/login", {
+        method: "POST",
+        body: JSON.stringify({ type: type, id: id })
+      })
+        .then(res => res.json())
+        .then(function(data) {
+          console.log(data);
+          if (data.success === false) {
+            alert("hata " + JSON.stringify(data));
+            return;
+          }
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     }
   }
 };
 </script>
 
 <style>
-
 .login-box {
   width: 700px;
   height: 400px;
